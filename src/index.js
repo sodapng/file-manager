@@ -7,6 +7,7 @@ import handlerCd from './handlers/handlerCd.js'
 import handlerCp from './handlers/handlerCp.js'
 import handlerLine from './handlers/handlerLine.js'
 import handlerLs from './handlers/handlerLs.js'
+import handlerRm from './handlers/handlerRm.js'
 import handlerRn from './handlers/handlerRn.js'
 import handlerUp from './handlers/handlerUp.js'
 import displayCurrentDirectory from './helpers/displayCurrentDirectory.js'
@@ -22,6 +23,7 @@ eventEmitter
   .on('ls', handlerLs)
   .on('rn', handlerRn)
   .on('cp', handlerCp)
+  .on('rm', handlerRm)
 
 const rl = readline.createInterface({
   input,
