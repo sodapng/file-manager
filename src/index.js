@@ -5,6 +5,7 @@ import handlerAdd from './handlers/handlerAdd.js'
 import handlerCat from './handlers/handlerCat.js'
 import handlerCd from './handlers/handlerCd.js'
 import handlerCp from './handlers/handlerCp.js'
+import handlerHash from './handlers/handlerHash.js'
 import handlerLine from './handlers/handlerLine.js'
 import handlerLs from './handlers/handlerLs.js'
 import handlerMv from './handlers/handlerMv.js'
@@ -17,15 +18,16 @@ displayCurrentDirectory()
 
 const eventEmitter = new EventEmitter()
 eventEmitter
-  .on('cat', handlerCat)
-  .on('add', handlerAdd)
   .on('up', handlerUp)
   .on('cd', handlerCd)
   .on('ls', handlerLs)
+  .on('cat', handlerCat)
+  .on('add', handlerAdd)
   .on('rn', handlerRn)
   .on('cp', handlerCp)
-  .on('rm', handlerRm)
   .on('mv', handlerMv)
+  .on('rm', handlerRm)
+  .on('hash', handlerHash)
 
 const rl = readline.createInterface({
   input,
