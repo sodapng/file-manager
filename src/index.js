@@ -1,5 +1,12 @@
 import EventEmitter from 'node:events'
-import { stdin as input, stdout as output } from 'node:process'
+import { homedir } from 'node:os'
+import {
+  argv,
+  chdir,
+  exit,
+  stdin as input,
+  stdout as output,
+} from 'node:process'
 import * as readline from 'node:readline'
 import handlerAdd from './handlers/handlerAdd.js'
 import handlerCat from './handlers/handlerCat.js'
@@ -17,6 +24,10 @@ import handlerRn from './handlers/handlerRn.js'
 import handlerUp from './handlers/handlerUp.js'
 import displayCurrentDirectory from './helpers/displayCurrentDirectory.js'
 
+chdir(homedir())
+const username = argv.slice(2)[0]?.split('=')[1]
+
+console.log(`Welcome to the File Manager, ${username}!`)
 displayCurrentDirectory()
 
 const eventEmitter = new EventEmitter()
@@ -40,5 +51,9 @@ const rl = readline.createInterface({
   output,
 })
 
-rl.prompt()
 rl.on('line', handlerLine.bind(rl, eventEmitter))
+  .on('SIGINT', () => rl.close())
+  .on('close', () => {
+    console.log(`Thank you for using File Manager, ${username}!`)
+    setTimeout(() => exit(0), 100)
+  })

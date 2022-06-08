@@ -7,7 +7,7 @@ export default async function handlerLs() {
   try {
     const currentDirectory = resolve(cwd())
     const files = await readdir(currentDirectory)
-    console.log(files)
+    console.table(files)
     displayCurrentDirectory()
   } catch (error) {
     console.error('Operation failed')
