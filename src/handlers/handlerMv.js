@@ -10,9 +10,10 @@ export default async function handlerMv([pathToFile, pathToNewDirectory]) {
 
     if (isNotDirectory) throw new Error('invalid path_to_new_directory')
 
-    pathToFile = resolve(cwd(), pathToFile)
-    const { name } = parse(pathToFile)
-    pathToNewDirectory = resolve(pathToNewDirectory, name)
+    pathToFile = resolve(pathToFile)
+    const { base } = parse(pathToFile)
+    pathToNewDirectory = resolve(pathToNewDirectory, base)
+    console.log(pathToFile, pathToNewDirectory)
     await rename(pathToFile, pathToNewDirectory)
     displayCurrentDirectory()
   } catch (error) {
