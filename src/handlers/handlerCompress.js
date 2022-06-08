@@ -1,5 +1,6 @@
 import { createReadStream, createWriteStream } from 'node:fs'
 import { parse, resolve } from 'node:path'
+import { pipeline } from 'node:stream/promises'
 import { createBrotliCompress } from 'node:zlib'
 import displayCurrentDirectory from '../helpers/displayCurrentDirectory.js'
 import isDirectory from '../helpers/isDirectory.js'
@@ -21,7 +22,7 @@ export default async function handlerCompress([pathToFile, pathToDestination]) {
     const readableStream = createReadStream(pathToFile)
     const writableStream = createWriteStream(pathToDestination)
     const brotliCompress = createBrotliCompress()
-    readableStream.pipe(brotliCompress).pipe(writableStream)
+    await pipeline(readableStream, brotliCompress, writableStream)
     displayCurrentDirectory()
   } catch (error) {
     console.error('Operation failed')

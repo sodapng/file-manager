@@ -1,5 +1,6 @@
 import { createReadStream, createWriteStream } from 'node:fs'
 import { parse, resolve } from 'node:path'
+import { pipeline } from 'node:stream/promises'
 import { createBrotliDecompress } from 'node:zlib'
 import displayCurrentDirectory from '../helpers/displayCurrentDirectory.js'
 import isDirectory from '../helpers/isDirectory.js'
@@ -26,7 +27,7 @@ export default async function handlerDecompress([
     const readableStream = createReadStream(pathToFile)
     const writableStream = createWriteStream(pathToDestination)
     const brotliDecompress = createBrotliDecompress()
-    readableStream.pipe(brotliDecompress).pipe(writableStream)
+    await pipeline(readableStream, brotliDecompress, writableStream)
     displayCurrentDirectory()
   } catch (error) {
     console.error('Operation failed')
