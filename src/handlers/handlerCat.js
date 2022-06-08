@@ -14,7 +14,7 @@ export default async function handlerCat([pathToFile]) {
 
     finished(readableStream, (error) => {
       if (error) {
-        handlerError()
+        handlerError(error)
       } else {
         stdout.write('\n')
         displayCurrentDirectory()
