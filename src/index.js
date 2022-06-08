@@ -4,6 +4,7 @@ import * as readline from 'node:readline'
 import handlerAdd from './handlers/handlerAdd.js'
 import handlerCat from './handlers/handlerCat.js'
 import handlerCd from './handlers/handlerCd.js'
+import handlerCompress from './handlers/handlerCompress.js'
 import handlerCp from './handlers/handlerCp.js'
 import handlerHash from './handlers/handlerHash.js'
 import handlerLine from './handlers/handlerLine.js'
@@ -30,6 +31,7 @@ eventEmitter
   .on('rm', handlerRm)
   .on('hash', handlerHash)
   .on('os', handlerOs)
+  .on('compress', handlerCompress)
 
 const rl = readline.createInterface({
   input,
