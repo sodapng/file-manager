@@ -1,4 +1,4 @@
-import { cpus, userInfo } from 'node:os'
+import { cpus, EOL, userInfo } from 'node:os'
 import { arch, platform } from 'node:process'
 import displayCurrentDirectory from '../helpers/displayCurrentDirectory.js'
 
@@ -7,11 +7,10 @@ export default async function handlerOs([param]) {
     if (!param) throw new Error('parameter is not specified')
 
     const { username, homedir } = userInfo()
-    const EOL = platform === 'win32' ? '\\r\\n' : '\\n'
     const cpusInfo = cpus().map(({ model, speed }) => ({ model, speed }))
 
     const osInfo = {
-      '--EOL': EOL,
+      '--EOL': JSON.stringify(EOL),
       '--cpus': cpusInfo,
       '--homedir': homedir,
       '--username': username,
