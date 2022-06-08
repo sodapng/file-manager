@@ -6,6 +6,7 @@ import handlerCat from './handlers/handlerCat.js'
 import handlerCd from './handlers/handlerCd.js'
 import handlerCompress from './handlers/handlerCompress.js'
 import handlerCp from './handlers/handlerCp.js'
+import handlerDecompress from './handlers/handlerDecompress.js'
 import handlerHash from './handlers/handlerHash.js'
 import handlerLine from './handlers/handlerLine.js'
 import handlerLs from './handlers/handlerLs.js'
@@ -32,10 +33,12 @@ eventEmitter
   .on('hash', handlerHash)
   .on('os', handlerOs)
   .on('compress', handlerCompress)
+  .on('decompress', handlerDecompress)
 
 const rl = readline.createInterface({
   input,
   output,
 })
 
+rl.prompt()
 rl.on('line', handlerLine.bind(rl, eventEmitter))

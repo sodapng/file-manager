@@ -8,4 +8,6 @@ export default function handlerLine(eventEmitter, line) {
   } else {
     console.error('Invalid input')
   }
+
+  this.prompt()
 }
