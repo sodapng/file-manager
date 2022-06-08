@@ -6,7 +6,6 @@ export default async function handlerCp([pathToFile, pathToNewDirectory]) {
   try {
     pathToFile = resolve(pathToFile)
     pathToNewDirectory = resolve(pathToNewDirectory)
-    console.log(pathToFile, pathToNewDirectory)
     await copyFile(pathToFile, pathToNewDirectory)
     displayCurrentDirectory()
   } catch (error) {
