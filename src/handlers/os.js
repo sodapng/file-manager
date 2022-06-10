@@ -7,7 +7,10 @@ export default async function handleOs([param]) {
     if (!param) throw new Error('parameter is not specified')
 
     const { username, homedir } = userInfo()
-    const cpusInfo = cpus().map(({ model, speed }) => ({ model, speed }))
+    const cpusInfo = cpus().map(({ model, speed }) => {
+      speed = `${speed / 1000}GHz`
+      return { model, speed }
+    })
 
     const osInfo = {
       '--EOL': JSON.stringify(EOL),
