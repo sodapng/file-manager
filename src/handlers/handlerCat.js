@@ -1,15 +1,15 @@
-import { stdout } from 'node:process'
 import { createReadStream } from 'node:fs'
-import handlerError from './handlerError.js'
 import { resolve } from 'node:path'
-import { finished } from 'node:stream'
+import displayCurrentDirectory from '../helpers/displayCurrentDirectory.js'
+import { pipeline } from 'node:stream/promises'
+import { customOutput } from '../helpers/other.js'
 
 export default async function handlerCat([pathToFile]) {
   try {
     pathToFile = resolve(pathToFile)
     const readableStream = createReadStream(pathToFile, { encoding: 'utf8' })
-    readableStream.pipe(stdout)
-    finished(readableStream, handlerError)
+    await pipeline(readableStream, customOutput())
+    displayCurrentDirectory()
   } catch (error) {
     console.error('Operation failed')
   }

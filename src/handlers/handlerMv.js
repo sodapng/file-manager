@@ -1,5 +1,7 @@
-import { rename } from 'node:fs/promises'
+import { createReadStream, createWriteStream } from 'node:fs'
+import { unlink } from 'node:fs/promises'
 import { parse, resolve } from 'node:path'
+import { pipeline } from 'node:stream/promises'
 import displayCurrentDirectory from '../helpers/displayCurrentDirectory.js'
 import isDirectory from '../helpers/isDirectory.js'
 
@@ -12,7 +14,10 @@ export default async function handlerMv([pathToFile, pathToNewDirectory]) {
     pathToFile = resolve(pathToFile)
     const { base } = parse(pathToFile)
     pathToNewDirectory = resolve(pathToNewDirectory, base)
-    await rename(pathToFile, pathToNewDirectory)
+    const readableStream = createReadStream(pathToFile)
+    const writableStream = createWriteStream(pathToNewDirectory)
+    await pipeline(readableStream, writableStream)
+    await unlink(pathToFile)
     displayCurrentDirectory()
   } catch (error) {
     console.error('Operation failed')

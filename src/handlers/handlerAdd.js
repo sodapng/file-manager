@@ -4,12 +4,14 @@ import { cwd } from 'node:process'
 import displayCurrentDirectory from '../helpers/displayCurrentDirectory.js'
 
 export default async function handlerAdd([newFileName]) {
+  let filehandle
   try {
     const pathToFile = resolve(cwd(), newFileName)
-    const filehandle = await open(pathToFile, 'a')
-    await filehandle.close()
+    filehandle = await open(pathToFile, 'w')
     displayCurrentDirectory()
   } catch (error) {
     console.error('Operation failed')
+  } finally {
+    filehandle?.close()
   }
 }

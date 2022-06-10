@@ -24,19 +24,21 @@ import handlerRn from './handlers/handlerRn.js'
 import handlerUp from './handlers/handlerUp.js'
 import displayCurrentDirectory from './helpers/displayCurrentDirectory.js'
 
-chdir(homedir())
+// chdir(homedir())
 
 const args = Object.fromEntries(
   argv.slice(2).map((arg) => {
     const [key, value] = arg.split('=')
-    return [key.slice(2), value]
+    return [key, value]
   })
 )
 
-console.log(`Welcome to the File Manager, ${args.username}!`)
+console.log(`Welcome to the File Manager, ${args['--username']}!`)
 displayCurrentDirectory()
 
 const eventEmitter = new EventEmitter()
+eventEmitter.setMaxListeners(0)
+
 eventEmitter
   .on('up', handlerUp)
   .on('cd', handlerCd)
@@ -60,6 +62,6 @@ const rl = readline.createInterface({
 rl.on('line', handlerLine.bind(rl, eventEmitter))
   .on('SIGINT', () => rl.close())
   .on('close', () => {
-    console.log(`Thank you for using File Manager, ${args.username}!`)
+    console.log(`Thank you for using File Manager, ${args['--username']}!`)
     setTimeout(() => exit(0), 100)
   })
