@@ -3,7 +3,7 @@ import { resolve } from 'node:path'
 import { cwd } from 'node:process'
 import displayCurrentDirectory from '../helpers/displayCurrentDirectory.js'
 
-export default async function handlerAdd([newFileName]) {
+export default async function handleAdd([newFileName]) {
   let filehandle
   try {
     const pathToFile = resolve(cwd(), newFileName)

@@ -1,4 +1,4 @@
-export default function handlerLine(eventEmitter, line) {
+export default function handleLine(eventEmitter, line) {
   try {
     const [command, ...args] = line.split(' ')
     if (/^(?:cd|cat|add|rm|os|hash)$/.test(command)) {

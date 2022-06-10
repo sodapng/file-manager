@@ -3,7 +3,7 @@ import { parse, resolve } from 'node:path'
 import { pipeline } from 'node:stream/promises'
 import displayCurrentDirectory from '../helpers/displayCurrentDirectory.js'
 
-export default async function handlerCp([pathToFile, pathToNewDirectory]) {
+export default async function handleCp([pathToFile, pathToNewDirectory]) {
   try {
     pathToFile = resolve(pathToFile)
     const { base } = parse(pathToFile)

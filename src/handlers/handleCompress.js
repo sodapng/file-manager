@@ -6,7 +6,7 @@ import displayCurrentDirectory from '../helpers/displayCurrentDirectory.js'
 import isDirectory from '../helpers/isDirectory.js'
 import isFile from '../helpers/isFile.js'
 
-export default async function handlerCompress([pathToFile, pathToDestination]) {
+export default async function handleCompress([pathToFile, pathToDestination]) {
   try {
     const isNotDirectory = !(await isDirectory(pathToDestination))
     const isNotFile = !(await isFile(pathToFile))

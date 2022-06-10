@@ -6,7 +6,7 @@ import displayCurrentDirectory from '../helpers/displayCurrentDirectory.js'
 import isDirectory from '../helpers/isDirectory.js'
 import isFile from '../helpers/isFile.js'
 
-export default async function handlerDecompress([
+export default async function handleDecompress([
   pathToFile,
   pathToDestination,
 ]) {

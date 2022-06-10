@@ -1,8 +1,8 @@
 import { cpus, EOL, userInfo } from 'node:os'
-import { arch, platform } from 'node:process'
+import { arch } from 'node:process'
 import displayCurrentDirectory from '../helpers/displayCurrentDirectory.js'
 
-export default async function handlerOs([param]) {
+export default async function handleOs([param]) {
   try {
     if (!param) throw new Error('parameter is not specified')
 

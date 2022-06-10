@@ -5,7 +5,7 @@ import { pipeline } from 'node:stream/promises'
 import displayCurrentDirectory from '../helpers/displayCurrentDirectory.js'
 import isDirectory from '../helpers/isDirectory.js'
 
-export default async function handlerMv([pathToFile, pathToNewDirectory]) {
+export default async function handleMv([pathToFile, pathToNewDirectory]) {
   try {
     const isNotDirectory = !(await isDirectory(pathToNewDirectory))
 

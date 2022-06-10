@@ -1,7 +1,7 @@
 import { chdir } from 'node:process'
 import displayCurrentDirectory from '../helpers/displayCurrentDirectory.js'
 
-export default async function handlerCd([pathToDirectory]) {
+export default async function handleCd([pathToDirectory]) {
   try {
     chdir(pathToDirectory)
     displayCurrentDirectory()
