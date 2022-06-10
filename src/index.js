@@ -24,7 +24,7 @@ import handlerRn from './handlers/handlerRn.js'
 import handlerUp from './handlers/handlerUp.js'
 import displayCurrentDirectory from './helpers/displayCurrentDirectory.js'
 
-// chdir(homedir())
+chdir(homedir())
 
 const args = Object.fromEntries(
   argv.slice(2).map((arg) => {

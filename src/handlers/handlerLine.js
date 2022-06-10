@@ -1,13 +1,20 @@
 export default function handlerLine(eventEmitter, line) {
-  const [command, ...args] = line.split(' ')
-
-  if (
-    /^(?:up|cd|ls|cat|add|rn|cp|mv|rm|os|hash|compress|decompress)/.test(line)
-  ) {
-    eventEmitter.emit(command, args)
-  } else if (/^\.exit$/.test(command)) {
-    this.close()
-  } else {
-    console.error('Invalid input')
+  try {
+    const [command, ...args] = line.split(' ')
+    if (/^(?:cd|cat|add|rm|os|hash)$/.test(command)) {
+      if (args.length !== 1) throw new Error('Invalid input')
+      eventEmitter.emit(command, args)
+    } else if (/^(?:rn|cp|mv|compress|decompress)$/.test(command)) {
+      if (args.length !== 2) throw new Error('Invalid input')
+      eventEmitter.emit(command)
+    } else if (/^(?:up|ls)$/.test(line)) {
+      eventEmitter.emit(command)
+    } else if (/^\.exit$/.test(command)) {
+      this.close()
+    } else {
+      throw new Error('Invalid input')
+    }
+  } catch (error) {
+    console.error(error.message)
   }
 }
