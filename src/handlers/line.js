@@ -2,12 +2,13 @@ import { delimiter } from 'node:path'
 
 export default function handleLine(eventEmitter, line) {
   try {
+    line = line.trim()
     let [command, ...args] = line.split(' ')
 
     if (/"|'/g.test(args)) {
       args = args
         .join(' ')
-        .split('" ')
+        .split(/["'] | ["']/)
         .map((arg) => arg.replace(/"|'/g, ''))
     }
 
