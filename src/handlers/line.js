@@ -10,11 +10,12 @@ export default function handleLine(eventEmitter, line) {
         .map((arg) => arg.replace(/"|'/g, ''))
     }
 
-    if (/^(?:cd|cat|add|rm|os|hash)$/.test(command)) {
-      if (args.length !== 1) throw new Error('Invalid input')
+    if (/^(?:cd|cat|add|rm|os|hash)$/.test(command) && args.length === 1) {
       eventEmitter.emit(command, args)
-    } else if (/^(?:rn|cp|mv|compress|decompress)$/.test(command)) {
-      if (args.length !== 2) throw new Error('Invalid input')
+    } else if (
+      /^(?:rn|cp|mv|compress|decompress)$/.test(command) &&
+      args.length === 2
+    ) {
       eventEmitter.emit(command, args)
     } else if (/^(?:up|ls)$/.test(line)) {
       eventEmitter.emit(command)
