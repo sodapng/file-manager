@@ -1,5 +1,3 @@
-import { delimiter } from 'node:path'
-
 export default function handleLine(eventEmitter, line) {
   try {
     line = line.trim()

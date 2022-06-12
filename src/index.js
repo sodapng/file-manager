@@ -33,7 +33,9 @@ const args = Object.fromEntries(
   })
 )
 
-console.log(`Welcome to the File Manager, ${args['--username']}!`)
+const username = args['--username'] ? args['--username'] : 'stranger'
+
+console.log(`Welcome to the File Manager, ${username}!`)
 displayCurrentDirectory()
 
 const eventEmitter = new EventEmitter()
@@ -62,6 +64,6 @@ const rl = readline.createInterface({
 rl.on('line', handleLine.bind(rl, eventEmitter))
   .on('SIGINT', () => rl.close())
   .on('close', () => {
-    console.log(`Thank you for using File Manager, ${args['--username']}!`)
+    console.log(`Thank you for using File Manager, ${username}!`)
     setTimeout(() => exit(0), 100)
   })
